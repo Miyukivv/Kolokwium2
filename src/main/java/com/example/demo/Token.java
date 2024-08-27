@@ -12,7 +12,7 @@ public class Token {
     private static int actualValueOfToken=0;
 
     private static List<Token> tokens = new ArrayList<Token>();
-    
+
     public Token() {
         id=actualValueOfToken++;
         timeOfCreation=LocalDateTime.now();
