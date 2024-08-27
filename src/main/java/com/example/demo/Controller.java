@@ -39,5 +39,13 @@ public class Controller {
         return map;
     }
 
+    @GetMapping("/tokens")
+    public ArrayList<Token.TokenDTO> getTokens() {
+        List<Token.TokenDTO> tokensDTOs = new ArrayList<>();
+        for (Token t : Token.getTokens()) {
+            tokensDTOs.add(new Token.TokenDTO(t));
+        }
+        return (ArrayList<Token.TokenDTO>) tokensDTOs;
+    }
 
 }
