@@ -21,5 +21,4 @@ public class Token {
         return timeOfCreation;
     }
 
-
 }

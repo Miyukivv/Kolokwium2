@@ -10,10 +10,10 @@ import java.util.Map;
 @RestController
 public class Controller {
 
-    @GetMapping
-    public String hi(){
-        return "hi";
-    }
+//    @GetMapping
+//    public String hi(){
+//        return "hi";
+//    }
 
     @PostMapping("/register")
     public String register(){
@@ -26,6 +26,17 @@ public class Controller {
         Gson gson = new Gson();
         String tokenJson = gson.toJson(map);
         return tokenJson;
+    }
+
+    @PostMapping("/register")
+    public Map<String, String> register() {
+        Token token = new Token();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("token", String.valueOf(token.getId()));
+        map.put("dateOfCreation", token.getTimeOfCreation().toString());
+
+        return map;
     }
 
 
