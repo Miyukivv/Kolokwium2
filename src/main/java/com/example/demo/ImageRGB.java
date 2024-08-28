@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ImageRGB {
@@ -24,6 +25,12 @@ public class ImageRGB {
             instance=new ImageRGB();
         }
         return instance;
+    }
+
+    public void setPixelOfImage(int x, int y, String hexColor){
+        Color color = Color.decode(hexColor);
+        int rgb = color.getRGB();
+        image.setRGB(x, y, rgb);
     }
 
 }
