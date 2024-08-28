@@ -41,8 +41,10 @@ public class ImageController {
     @PostMapping("/pixel")
     public ResponseEntity setColorOfPixel(@RequestParam int x, @RequestParam int y, @RequestParam String hexColor, @RequestParam int id)
     {
+        boolean tokenFound = false;
         for (Token tokens : Token.getTokens()){
             if (tokens.getId()==id) {
+                tokenFound=true;
                 if (!tokens.isTokenActive()){
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Nieaktywny token");
                 }
@@ -51,6 +53,9 @@ public class ImageController {
                 }
             }
         }
+        if(!tokenFound) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Brak tokenu");
+        }
 
         if (x<0 || y<0 || x>512 || y>512){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podane złe dane");
@@ -58,7 +63,14 @@ public class ImageController {
 
         ImageRGB image = ImageRGB.getInstance();
         image.setPixelOfImage(x,y,hexColor);
+
+        Database database=Database.getInstance();
+
+        database.addPixelToDatabase(id,x,y,hexColor);
+        database.closeConnection();
+
         return ResponseEntity.status(HttpStatus.OK).body("git, dziala");
     }
+
 
 }
