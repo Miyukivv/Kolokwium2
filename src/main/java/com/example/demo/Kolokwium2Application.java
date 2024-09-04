@@ -10,6 +10,9 @@ public class Kolokwium2Application {
 		ImageRGB imageRGB = ImageRGB.getInstance();
 		imageRGB.setImageBasedOnPixels();
 
+		Server server = new Server(5000);
+		server.start();
+
 		SpringApplication.run(Kolokwium2Application.class, args);
 	}
 
