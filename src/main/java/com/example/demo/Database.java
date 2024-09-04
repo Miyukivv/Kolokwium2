@@ -4,6 +4,8 @@ import org.springframework.cglib.core.Local;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     private static final String DRIVER = "org.sqlite.JDBC";
@@ -77,6 +79,28 @@ public class Database {
 //        String delete="DELETE FROM entry WHERE token=?;\n";
 //    }
 
+
+    public ArrayList<Pixel> getListOfPixelsFromDatabase(){
+        ArrayList<Pixel> pixels=new ArrayList<>();
+
+        try {
+            ResultSet result=stat.executeQuery("SELECT * FROM entry");
+            int x;
+            int y;
+            String color;
+
+            while(result.next()){
+                x=result.getInt("x");
+                y=result.getInt("y");
+                color=result.getString("color");
+                pixels.add(new Pixel(x,y,color));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return pixels;
+    }
+
     public void closeConnection() {
         try {
             conn.close();
@@ -85,4 +109,6 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+
 }

@@ -67,10 +67,9 @@ public class ImageController {
         Database database=Database.getInstance();
 
         database.addPixelToDatabase(id,x,y,hexColor);
-        database.closeConnection();
+//        database.closeConnection();
 
         return ResponseEntity.status(HttpStatus.OK).body("git, dziala");
     }
-
 
 }

@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class ImageRGB {
 
@@ -32,5 +33,16 @@ public class ImageRGB {
         int rgb = color.getRGB();
         image.setRGB(x, y, rgb);
     }
+
+    public void setImageBasedOnPixels(){
+        Database database=Database.getInstance();
+
+        ArrayList<Pixel> pixels = database.getListOfPixelsFromDatabase();
+
+        for (Pixel pixel : pixels){
+            setPixelOfImage(pixel.getX(),pixel.getY(), pixel.getColor());
+        }
+    }
+
 
 }
