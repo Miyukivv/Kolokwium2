@@ -40,21 +40,21 @@ public class Server extends Thread {
                         pw.println("Podaj login");
                         String userName;
                         userName = reader.readLine();
-                        System.out.println(userName);
 
                         String password;
                         pw.println("Podaj haslo");
                         password = reader.readLine();
-                        System.out.println(password);
+
 
                         if (userName.equals(login) && password.equals(haslo)) {
                             pw.println("Zostales polaczony");
                             isConnected = true;
+                            ClientHandler clientHandler=new ClientHandler(clientSocket,reader,pw);
+                            clientHandler.run();
                         } else {
                             pw.println("Podano zle dane");
                             clientSocket.close();
                         }
-
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

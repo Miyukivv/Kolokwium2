@@ -50,12 +50,19 @@ public class Database {
         }
     }
 
-    /* PreparedStatement prepStmt = conn.prepareStatement(
-                      "insert into czytelnicy values (NULL, ?, ?, ?);");
-              prepStmt.setString(1, imie);
-              prepStmt.setString(2, nazwisko);
-              prepStmt.setString(3, pesel);
-              prepStmt.execute();*/
+    public int removeRecords(int token){
+        String deleteMyRecords="DELETE FROM entry WHERE token=?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement=conn.prepareStatement(deleteMyRecords);
+            preparedStatement.setInt(1,token);
+
+            int records = preparedStatement.executeUpdate();
+            return records;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void addPixelToDatabase(int id, int x, int y, String hexcolor){
         String insert="INSERT INTO entry (token, x, y, color, timestamp) VALUES(?, ?, ?, ?, ?);";
@@ -72,7 +79,6 @@ public class Database {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 //    public void deletePixelFromDatabase(int id, int x, int y, String hexcolor){

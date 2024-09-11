@@ -45,6 +45,15 @@ long elapsedMinutes = ChronoUnit.MINUTES.between(start, end);
         return elapsedMinutes<5;
     }
 
+    //usuwanie tokenu
+    public static void removeToken(int id){
+        for (Token token : tokens){
+            if (token.getId()==id){
+                tokens.remove(token);
+            }
+        }
+    }
+
     static class TokenDTO {
         public int id;
         public LocalDateTime timeOfCreation;
@@ -55,5 +64,6 @@ long elapsedMinutes = ChronoUnit.MINUTES.between(start, end);
             this.timeOfCreation = token.timeOfCreation;
             this.isActive = token.isTokenActive();
         }
+
     }
 }
